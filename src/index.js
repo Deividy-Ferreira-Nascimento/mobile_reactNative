@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { View ,Text, StyleSheet, StatusBar} from 'react-native';
-import { api } from '../services/api'
+import api from './services/api'
+
 
 export default function App() {
-   const [projects, setProjects] = useState([]);
+    const [projects, setProjects] = useState([])
+    useEffect(() => {
+        api.get('project').then(res => {
+            console.log(res.data)
+            setProjects(res.data)
+        })
+    }, [])
    
-   useEffect(() => {
-       api.get('project').then(res => {
-        console.log(res.data);
-        setProjects(res.data)
-       },[])
-       
-   })
     return (
         <>
     
