@@ -1,12 +1,28 @@
-import React from 'react';
-import { View ,Text, StyleSheet} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View ,Text, StyleSheet, StatusBar} from 'react-native';
+import { api } from '../services/api'
 
 export default function App() {
+   const [projects, setProjects] = useState([]);
+   
+   useEffect(() => {
+       api.get('project').then(res => {
+        console.log(res.data);
+        setProjects(res.data)
+       },[])
+       
+   })
     return (
-    <View style= {styles.container}>
+        <>
+    
+    <View style= {styles.container} >
+    <StatusBar barStyle="light-content" backgroundColor='#7359d1'/>
     <Text style={styles.title}>Hello World</Text>    
     <Text style={styles.subtitle}>Project with React Native</Text>
     </View>
+    
+     </>
+
     );
  
     
